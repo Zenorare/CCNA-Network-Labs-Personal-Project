@@ -7,7 +7,7 @@
 ---
 
 ## 📝 Project Description
-This project focuses on designing and implementing a secure, resilient, and centrally managed network for [Project Name]. Key objectives include:
+This project focuses on designing and implementing a secure, resilient, and centrally managed network. Key objectives include:
 
 - Deploying centralized servers to manage core services efficiently.  
 - Implementing a Wireless LAN Controller (WLC) for centralized wireless network management.  
