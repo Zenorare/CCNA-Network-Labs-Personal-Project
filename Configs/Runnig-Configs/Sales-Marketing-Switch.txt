@@ -1,0 +1,164 @@
+Sales-Marketing-Switch(config)# do show runn
+Building configuration...
+
+Current configuration : 9990 bytes
+!
+version 15.0
+service timestamps log datetime msec
+service timestamps debug datetime msec
+service password-encryption
+!
+hostname Sales-Marketing-Switch
+!
+enable secret 5 $1$mERr$hx5rVt7rPNoS4wqbXKX7m0
+!
+!
+!
+ip ssh version 2
+ip domain-name wiseman.com
+ip name-server 172.16.1.4
+!
+username admin secret 5 $1$mERr$hx5rVt7rPNoS4wqbXKX7m0
+!
+ip arp inspection vlan 40,50,75,200,777
+!
+ip dhcp snooping vlan 40,50,75,200,777
+ip dhcp snooping
+!
+dot1x system-auth-control
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+interface FastEthernet0/1
+ description Sales-Marketing-Access-Point
+ switchport access vlan 75
+ switchport mode access
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FastEthernet0/2
+ description Sales-Phone-PC-1
+ switchport access vlan 40
+ switchport mode access
+ switchport voice vlan 200
+ switchport port-security
+ switchport port-security maximum 2
+ switchport port-security mac-address sticky 
+ switchport port-security violation restrict 
+ switchport port-security mac-address sticky 000A.F3B1.24C1
+ switchport port-security mac-address sticky 000D.BD10.CC26
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FastEthernet0/3
+ description Sales-Printer
+ switchport access vlan 40
+ switchport mode access
+ switchport port-security
+ switchport port-security maximum 2
+ switchport port-security mac-address sticky 
+ switchport port-security violation restrict 
+ switchport port-security mac-address sticky 00E0.A313.00DE
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FastEthernet0/4
+ description Marketing-Phone-PC-1
+ switchport access vlan 50
+ switchport mode access
+ switchport voice vlan 200
+ switchport port-security
+ switchport port-security maximum 2
+ switchport port-security mac-address sticky 
+ switchport port-security violation restrict 
+ switchport port-security mac-address sticky 0002.4A3B.6D43
+ switchport port-security mac-address sticky 0010.11D1.19CA
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FastEthernet0/5
+ description Marketing Printer
+ switchport access vlan 50
+ switchport mode access
+ switchport port-security
+ switchport port-security maximum 2
+ switchport port-security mac-address sticky 
+ switchport port-security violation restrict 
+ switchport port-security mac-address sticky 0090.21A9.4443
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FastEthernet0/6 - 24
+ description Unused-Ports
+ switchport access vlan 999
+ switchport mode access
+ switchport port-security
+ switchport port-security maximum 2
+ switchport port-security mac-address sticky 
+ switchport port-security violation restrict 
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ shutdown
+!
+interface GigabitEthernet0/1
+ description Sales-Marketing-Main-Trunk-MLS-West
+ switchport trunk native vlan 998
+ switchport trunk allowed vlan 40,50,75,200,777
+ ip arp inspection trust
+ ip dhcp snooping trust
+ switchport mode trunk
+ switchport nonegotiate
+!
+interface GigabitEthernet0/2
+ description Backup-Fail-Over-From-Sales-Marketing-Switch-to-HR-Talent-Switch-if-MLS-West-Fails
+ switchport trunk native vlan 998
+ switchport trunk allowed vlan 40,50,75,200,777
+ ip arp inspection trust
+ ip dhcp snooping trust
+ switchport mode trunk
+ switchport nonegotiate
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+interface Vlan777
+ ip address 192.168.1.13 255.255.255.0
+!
+ip default-gateway 192.168.1.1
+!
+banner motd ^C Unauthorized access to this system is forbidden and will be
+prosecuted by law. By accessing this system, you agree that 
+all your actions may be monitored if unauthorized usage is 
+suspected. You have been warned. ^C
+logging 172.16.1.5
+!
+!
+!
+ip access-list extended SSH_ONLY_IT
+ permit tcp 10.45.1.0 0.0.0.255 any eq 22
+ deny ip any any
+line con 0
+!
+line vty 0 4
+ access-class SSH_ONLY_IT in
+ logging synchronous
+ login local
+ transport input ssh
+ transport output ssh
+ privilege level 15
+line vty 5 15
+ access-class SSH_ONLY_IT in
+ logging synchronous
+ login local
+ transport input ssh
+ transport output ssh
+ privilege level 15
+!
+!
+!
+ntp authenticate
+ntp server 172.16.1.3
+!
+end
+

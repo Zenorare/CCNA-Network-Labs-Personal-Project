@@ -1,0 +1,104 @@
+Firewall-A#show running-config 
+: Saved
+:
+ASA Version 9.6(1)
+!
+hostname Firewall-A
+domain-name wiseman.com
+names
+!
+interface GigabitEthernet1/1
+ nameif inside
+ security-level 100
+ ip address 192.168.2.2 255.255.255.252
+!
+interface GigabitEthernet1/2
+ description Unused-Port
+ no nameif
+ no security-level
+ no ip address
+ shutdown
+!
+interface GigabitEthernet1/3
+ nameif Outside
+ security-level 0
+ ip address 54.157.9.45 255.255.255.252
+!
+interface GigabitEthernet1/4
+ description Unused-Port
+ no nameif
+ no security-level
+ no ip address
+ shutdown
+!
+interface GigabitEthernet1/5
+ description Unused-Port
+ no nameif
+ no security-level
+ no ip address
+ shutdown
+!
+interface GigabitEthernet1/6
+ description Unused-Port
+ no nameif
+ no security-level
+ no ip address
+ shutdown
+!
+interface GigabitEthernet1/7
+ description Unused-Port
+ no nameif
+ no security-level
+ no ip address
+ shutdown
+!
+interface GigabitEthernet1/8
+ description Unused-Port
+ no nameif
+ no security-level
+ no ip address
+ shutdown
+!
+interface Management1/1
+ description Unused-Mgmt-Port
+ management-only
+ no nameif
+ no security-level
+ no ip address
+ shutdown
+!
+object network LAN_USERS
+ subnet 10.45.0.0 255.255.0.0
+ nat (inside,Outside) dynamic interface
+!
+!
+access-list INSIDE-IN extended permit ip 10.45.0.0 255.255.0.0 any
+access-list OUTSIDE-IN extended permit tcp any host 54.157.9.45 eq www
+access-list OUTSIDE-IN extended permit tcp any host 54.157.9.45 eq 443
+access-list OUTSIDE-IN extended deny icmp any any
+!
+!
+access-group INSIDE-IN in interface inside
+access-group OUTSIDE-IN in interface Outside
+aaa authentication ssh console LOCAL
+!
+ntp server 172.16.1.3
+username admin password 4IncP7vTjpaba2aF encrypted
+!
+class-map inspection_default
+ match default-inspection-traffic
+!
+policy-map type inspect dns preset_dns_map
+ parameters
+  message-length maximum 512
+policy-map global_policy
+ class inspection_default
+  inspect dns preset_dns_map
+  inspect ftp 
+  inspect tftp 
+!
+service-policy global_policy global
+!
+telnet timeout 5
+ssh 10.45.1.0 255.255.255.0 inside
+ssh timeout 10

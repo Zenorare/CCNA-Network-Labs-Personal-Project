@@ -1,0 +1,136 @@
+R2#show running-config 
+Building configuration...
+
+Current configuration : 2465 bytes
+!
+version 15.1
+service timestamps log datetime msec
+service timestamps debug datetime msec
+service password-encryption
+!
+hostname R2
+!
+!
+!
+!
+!
+!
+!
+!
+ip cef
+no ipv6 cef
+!
+!
+!
+username admin privilege 15 secret 5 $1$mERr$hx5rVt7rPNoS4wqbXKX7m0
+!
+!
+license udi pid CISCO2911/K9 sn FTX1524H1VW-
+!
+!
+!
+!
+!
+!
+!
+!
+!
+ip ssh version 2
+ip domain-name wiseman.com
+!
+!
+spanning-tree mode pvst
+!
+!
+!
+!
+!
+!
+interface Loopback0
+ description SSH-Management-Remote
+ ip address 192.168.1.5 255.255.255.0
+!
+interface GigabitEthernet0/0
+ description R2-To-Firewall
+ ip address 192.168.2.21 255.255.255.252
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/1
+ description R2-Backup-Route-to-MLS-West
+ ip address 192.168.2.14 255.255.255.252
+ ip ospf cost 100
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/2
+ description R2-Preferred-Route-MLS-East
+ ip address 192.168.2.17 255.255.255.252
+ duplex auto
+ speed auto
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+router ospf 1
+ log-adjacency-changes
+ network 10.45.0.0 0.0.255.255 area 0
+ network 172.16.0.0 0.0.255.255 area 0
+ network 192.168.1.0 0.0.0.255 area 0
+ network 192.168.2.0 0.0.0.255 area 0
+ network 172.16.99.0 0.0.0.3 area 0
+!
+ip classless
+ip route 0.0.0.0 0.0.0.0 192.168.2.22 
+ip route 192.168.1.15 255.255.255.255 192.168.2.22 
+!
+ip flow-export version 9
+!
+!
+ip access-list extended SSH_ONLY_IT
+ permit tcp 10.45.1.0 0.0.0.255 any eq 22
+ deny ip any any
+!
+banner login ^C
+************************************************************
+*                                                          *
+*  Unauthorized access to this system is forbidden and    *
+*  will be prosecuted by law. By accessing this system,   *
+*  you agree that all your actions may be monitored if    *
+*  unauthorized usage is suspected. You have been warned. *
+*                                                          *
+************************************************************
+^C
+banner motd ^C
+Unauthorized access to this system is forbidden and will be
+prosecuted by law. By accessing this system, you agree that 
+all your actions may be monitored if unauthorized usage is 
+suspected. You have been warned.
+^C
+!
+!
+!
+!
+line con 0
+!
+line aux 0
+!
+line vty 0 4
+ access-class SSH_ONLY_IT in
+ logging synchronous
+ login local
+ transport input ssh
+ transport output ssh
+ privilege level 15
+line vty 5 15
+ access-class SSH_ONLY_IT in
+ logging synchronous
+ login local
+ transport input ssh
+ transport output ssh
+ privilege level 15
+!
+!
+!
+end

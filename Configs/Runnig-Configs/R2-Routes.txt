@@ -1,0 +1,39 @@
+R2#
+*Mar 01, 01:20:35.2020: SYS-5-CONFIG_I: Configured from console by consoleshow ip route
+Codes: L - local, C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2, E - EGP
+       i - IS-IS, L1 - IS-IS level-1, L2 - IS-IS level-2, ia - IS-IS inter area
+       * - candidate default, U - per-user static route, o - ODR
+       P - periodic downloaded static route
+
+Gateway of last resort is 192.168.2.22 to network 0.0.0.0
+
+     10.0.0.0/8 is variably subnetted, 7 subnets, 2 masks
+O       10.45.1.0/24 [110/2] via 192.168.2.18, 01:19:37, GigabitEthernet0/2
+O       10.45.2.0/24 [110/2] via 192.168.2.18, 01:19:37, GigabitEthernet0/2
+O       10.45.3.0/24 [110/2] via 192.168.2.18, 01:19:37, GigabitEthernet0/2
+O       10.45.4.0/24 [110/2] via 192.168.2.18, 01:19:37, GigabitEthernet0/2
+O       10.45.5.0/24 [110/2] via 192.168.2.18, 01:19:37, GigabitEthernet0/2
+O       10.45.76.0/23 [110/2] via 192.168.2.18, 01:19:37, GigabitEthernet0/2
+O       10.45.200.0/23 [110/2] via 192.168.2.18, 01:19:37, GigabitEthernet0/2
+     172.16.0.0/16 is variably subnetted, 2 subnets, 2 masks
+O       172.16.1.0/24 [110/2] via 192.168.2.18, 00:57:27, GigabitEthernet0/2
+O       172.16.99.0/30 [110/2] via 192.168.2.18, 00:34:15, GigabitEthernet0/2
+     192.168.1.0/24 is variably subnetted, 4 subnets, 2 masks
+C       192.168.1.0/24 is directly connected, Loopback0
+O       192.168.1.4/32 [110/3] via 192.168.2.18, 01:19:37, GigabitEthernet0/2
+L       192.168.1.5/32 is directly connected, Loopback0
+S       192.168.1.15/32 [1/0] via 192.168.2.22
+     192.168.2.0/24 is variably subnetted, 9 subnets, 2 masks
+O       192.168.2.0/30 [110/3] via 192.168.2.18, 01:19:37, GigabitEthernet0/2
+O       192.168.2.4/30 [110/12] via 192.168.2.18, 00:34:25, GigabitEthernet0/2
+O       192.168.2.8/30 [110/2] via 192.168.2.18, 01:19:37, GigabitEthernet0/2
+C       192.168.2.12/30 is directly connected, GigabitEthernet0/1
+L       192.168.2.14/32 is directly connected, GigabitEthernet0/1
+C       192.168.2.16/30 is directly connected, GigabitEthernet0/2
+L       192.168.2.17/32 is directly connected, GigabitEthernet0/2
+C       192.168.2.20/30 is directly connected, GigabitEthernet0/0
+L       192.168.2.21/32 is directly connected, GigabitEthernet0/0
+S*   0.0.0.0/0 [1/0] via 192.168.2.22
